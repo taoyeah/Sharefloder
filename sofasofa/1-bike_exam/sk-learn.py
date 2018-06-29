@@ -46,22 +46,22 @@ yyy=yy.reshape(yy.__len__(),1)
 # xx = preprocessing.scale(xx)    # normalization step
 
 X_train, X_test, y_train, y_test = train_test_split(
-    xx, yyy, test_size=0.4)
+    xx, yyy, test_size=0.05)
 
 # define placeholder for inputs to network
 keep_prob = tf.placeholder(tf.float32)
 xs = tf.placeholder(tf.float32, [None, 7])
 ys = tf.placeholder(tf.float32, [None, 1])
 # add hidden layer
-l1 = add_layer(xs, 7, 100, 'l1', activation_function=tf.nn.sigmoid)
+l1 = add_layer(xs, 7, 60, 'l1', activation_function=tf.nn.sigmoid)
 # # # # add hidden layer
-# l2 = add_layer(l1, 200, 60, 'l2',  activation_function=tf.nn.sigmoid)
+l2 = add_layer(l1, 60, 60, 'l2',  activation_function=tf.nn.relu)
 # # # add hidden layer
-# l3 = add_layer(l2, 60, 30, activation_function=tf.nn.sigmoid)
+# l3 = add_layer(l2, 60, 30, 'l3',  activation_function=tf.nn.sigmoid)
 # # # add hidden layer
-# l4 = add_layer(l3, 60, 60, activation_function=tf.nn.relu)
-# # add output layer
-prediction = add_layer(l1, 100, 1, 'l-pre', activation_function=None)
+# l4 = add_layer(l3, 30, 10, 'l4',  activation_function=tf.nn.sigmoid)
+# # # add output layer
+prediction = add_layer(l2, 60, 1, 'l-pre', activation_function=None)
 
 # the error between prediction and real data
 loss = tf.sqrt(tf.reduce_mean(tf.reduce_sum(tf.square(ys-prediction), reduction_indices=[1])))
@@ -73,8 +73,8 @@ train_step = tf.train.AdamOptimizer(0.02).minimize(loss)
 sess = tf.Session()
 merged = tf.summary.merge_all()
 # summary writer goes in here
-train_writer = tf.summary.FileWriter("logs/train2", sess.graph)
-test_writer = tf.summary.FileWriter("logs/test2", sess.graph)
+train_writer = tf.summary.FileWriter("logs/train6", sess.graph)
+test_writer = tf.summary.FileWriter("logs/test6", sess.graph)
 
 init = tf.global_variables_initializer()
 
@@ -91,9 +91,9 @@ print(yyy)
 
 mylossb = 100
 if Train_network:
-    for i in range(6000):
+    for i in range(5000):
         # training
-        sess.run(train_step, feed_dict={xs: X_train, ys: y_train, keep_prob: 0.90})
+        sess.run(train_step, feed_dict={xs: X_train, ys: y_train, keep_prob: 0.95})
         if i % 50 == 0:
             train_result = sess.run(merged, feed_dict={xs: X_train, ys: y_train, keep_prob: 1})
             test_result = sess.run(merged, feed_dict={xs: X_test, ys: y_test, keep_prob: 1})
@@ -119,5 +119,5 @@ for i in range(test.__len__()):
         y_pred[i]=0
 
 submit['y'] = y_pred
-submit.to_csv('taoyeah-net5.csv', index=False)
+submit.to_csv('taoyeah-net8.csv', index=False)
 
