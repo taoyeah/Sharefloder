@@ -1,7 +1,7 @@
 from opendatatools import stock
 from opendatatools import sns
 df_stock,msg = stock.get_daily('603063.SH', '2019-04-16', '2019-05-17')
-df_weibo_index, msg = sns.get_weibo_index('光伏', '1month')
+df_weibo_index, msg = sns.get_weibo_index('风电', '1month')
 
 from pylab import mpl
 mpl.rcParams['font.sans-serif'] = ['FangSong'] # 指定默认字体

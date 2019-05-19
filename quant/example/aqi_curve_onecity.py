@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 from opendatatools import aqi
-from pyecharts import Line
+from pyecharts.charts import Line
 
 import pandas as pd
 
