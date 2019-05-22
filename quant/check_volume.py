@@ -9,10 +9,11 @@ mystock = \
 dg = ts.get_realtime_quotes('601519') #Single stock symbol
 show1=dg[['code','name','price','bid','ask','volume','amount','time']]
 
-df = ts.get_tick_data('002797', date='2019-05-20',src='tt')
+# df = ts.get_tick_data('601519', date='2019-05-22',src='tt')
+df = ts.get_today_ticks('601519')
 
-buy = df[(df['type']=='买盘')&(df['volume']>500)]
-sale = df[(df['type']=='卖盘')&(df['volume']>500)]
+buy = df[(df['type']=='买盘')&(df['volume']>100)]
+sale = df[(df['type']=='卖盘')&(df['volume']>100)]
 
 buy_amount = buy.volume*buy.price
 buy_average_price = buy_amount.sum()/buy.volume.sum()
@@ -21,7 +22,7 @@ sale_amount = sale.volume*sale.price
 sale_average_price = sale_amount.sum()/sale.volume.sum()
 
 show = pd.DataFrame(columns=['buy','sale'],data=[[buy_average_price,sale_average_price],[buy.volume.sum(),sale.volume.sum()]])
-
+print(" ")
 print(show)
 print(show1)
 
