@@ -16,6 +16,10 @@ df = ts.get_today_ticks('002008')
 
 buy1 = df[(df['volume'] > 19) & (df['change'] > 0)]
 buy2 = df[(df['type'] == '买盘') & (df['volume'] > 19) & (df['change'] == 0)]
+buy = pd.concat([buy1, buy2])
+
+sale1 = df[(df['volume'] > 19) & (df['change'] < 0)]
+sale2 = df[(df['type'] == '卖盘') & (df['volume'] > 19) & (df['change'] == 0)]
 sale = pd.concat([sale1, sale2])
 
 
