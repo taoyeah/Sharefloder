@@ -116,10 +116,10 @@ if __name__ == '__main__':
     #df_sz = stock.get_pledge_info('SZ', '2018-06-21')
     #print(df_sz)
 
-    #df, msg = stock.get_hist_money_flow('000002.SZ')
-    #print(df)
+    df, msg = stock.get_hist_money_flow('000002.SZ')
+    print(df)
 
-    df, msg = stock.get_realtime_money_flow('300033.SZ')
+    df, msg = stock.get_realtime_money_flow('002008.SZ')
     print(df)
 
     #df, msg = stock.get_hist_money_flow_market()
